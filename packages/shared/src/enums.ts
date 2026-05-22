@@ -1,0 +1,56 @@
+export enum RsvpStatus {
+  PENDING = 'PENDING',
+  ACCEPTED = 'ACCEPTED',
+  DECLINED = 'DECLINED',
+  MAYBE = 'MAYBE',
+}
+
+export enum ExpenseCategory {
+  VENUE = 'VENUE',
+  CATERING = 'CATERING',
+  DECORATION = 'DECORATION',
+  PHOTOGRAPHY = 'PHOTOGRAPHY',
+  ENTERTAINMENT = 'ENTERTAINMENT',
+  TRANSPORT = 'TRANSPORT',
+  ATTIRE = 'ATTIRE',
+  OTHER = 'OTHER',
+}
+
+export enum PaymentStatus {
+  PENDING = 'PENDING',
+  PAID = 'PAID',
+  PARTIAL = 'PARTIAL',
+  OVERDUE = 'OVERDUE',
+}
+
+export enum VendorCategoryType {
+  CATERING = 'CATERING',
+  PHOTOGRAPHY = 'PHOTOGRAPHY',
+  DECORATOR = 'DECORATOR',
+  MAKEUP = 'MAKEUP',
+  MUSIC_BAND = 'MUSIC_BAND',
+  DJ = 'DJ',
+  VENUE = 'VENUE',
+  PANDIT = 'PANDIT',
+  TRANSPORTATION = 'TRANSPORTATION',
+  SOUND_LIGHTING = 'SOUND_LIGHTING',
+}
+
+export enum NotificationChannel {
+  PUSH = 'PUSH',
+  SMS = 'SMS',
+  WHATSAPP = 'WHATSAPP',
+  EMAIL = 'EMAIL',
+}
+
+export enum ReviewStatus {
+  PENDING = 'PENDING',
+  APPROVED = 'APPROVED',
+  REJECTED = 'REJECTED',
+}
+
+export enum TaskStatus {
+  TODO = 'TODO',
+  IN_PROGRESS = 'IN_PROGRESS',
+  DONE = 'DONE',
+}

@@ -1,0 +1,89 @@
+{
+  "appName": "Event Manager",
+  "splash": "Plan events the Nepali way",
+  "onboarding": {
+    "title1": "Plan Every Celebration",
+    "desc1": "Weddings, festivals, and gatherings in one place",
+    "title2": "Manage Guests & Budget",
+    "desc2": "RSVP, invites, and expense tracking",
+    "title3": "Discover Vendors",
+    "desc3": "Catering, photography, venues and more",
+    "getStarted": "Get Started",
+    "skip": "Skip"
+  },
+  "tabs": {
+    "home": "Home",
+    "events": "Events",
+    "vendors": "Vendors",
+    "calendar": "Calendar",
+    "more": "More"
+  },
+  "home": {
+    "featured": "Featured",
+    "upcomingFestivals": "Upcoming Festivals",
+    "myEvents": "My Events",
+    "vendors": "Top Vendors"
+  },
+  "events": {
+    "title": "My Events",
+    "create": "Create Event",
+    "empty": "No events yet. Create your first event!",
+    "duplicate": "Duplicate",
+    "delete": "Delete",
+    "edit": "Edit",
+    "details": "Event Details",
+    "guests": "Guests",
+    "budget": "Budget",
+    "timeline": "Timeline",
+    "tasks": "Tasks"
+  },
+  "guests": {
+    "title": "Guests",
+    "add": "Add Guest",
+    "rsvp": "RSVP",
+    "inviteWhatsApp": "WhatsApp Invite",
+    "inviteSms": "SMS Invite",
+    "qrInvite": "QR Invitation"
+  },
+  "budget": {
+    "title": "Budget",
+    "total": "Total Budget",
+    "spent": "Spent",
+    "remaining": "Remaining",
+    "addExpense": "Add Expense",
+    "alert": "Budget alert: approaching limit"
+  },
+  "vendors": {
+    "title": "Vendors",
+    "search": "Search vendors",
+    "contact": "Contact",
+    "reviews": "Reviews",
+    "filters": "Filters"
+  },
+  "calendar": {
+    "title": "Festival Calendar",
+    "gregorian": "Gregorian",
+    "bikram": "Bikram Sambat",
+    "countdown": "Days left"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "empty": "No notifications yet"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "theme": "Theme",
+    "darkMode": "Dark Mode",
+    "about": "About"
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "retry": "Retry",
+    "noData": "No data"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "expo": {
+    "name": "Event Manager",
+    "slug": "event-manager",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "scheme": "eventmanager",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#8B1A1A"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.eventmanager.app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#8B1A1A"
+      },
+      "package": "com.eventmanager.app"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/icon.png",
+          "color": "#8B1A1A"
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "apiUrl": "http://localhost:4000/api/v1"
+    }
+  }
+}

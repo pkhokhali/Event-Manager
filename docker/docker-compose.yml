@@ -1,0 +1,61 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: eventmanager
+      POSTGRES_PASSWORD: eventmanager
+      POSTGRES_DB: eventmanager
+    ports:
+      - '5432:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U eventmanager']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - '6379:6379'
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  api:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.api
+    ports:
+      - '4000:4000'
+    env_file:
+      - ../.env
+    environment:
+      DATABASE_URL: postgresql://eventmanager:eventmanager@postgres:5432/eventmanager
+      REDIS_URL: redis://redis:6379
+      ENABLE_CRON: 'true'
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  worker:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.api
+    command: npm run worker -w @event-manager/server
+    env_file:
+      - ../.env
+    environment:
+      DATABASE_URL: postgresql://eventmanager:eventmanager@postgres:5432/eventmanager
+      REDIS_URL: redis://redis:6379
+    depends_on:
+      - api
+      - redis
+
+volumes:
+  pgdata:

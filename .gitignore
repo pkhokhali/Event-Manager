@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.expo/
+.turbo/
+*.log
+.env
+.env.local
+.DS_Store
+coverage/
+server/prisma/migrations/**/migration_lock.toml
+!server/prisma/migrations/
+*.pem
+firebase-service-account.json
+android/
+ios/
