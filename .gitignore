@@ -8,6 +8,11 @@ dist/
 .DS_Store
 coverage/
 server/prisma/migrations/**/migration_lock.toml
+server/prisma/seed.js
+server/prisma/seed.d.ts
+server/prisma/seed.js.map
+server/prisma/seed.d.ts.map
+apps/admin/tsconfig.tsbuildinfo
 !server/prisma/migrations/
 *.pem
 firebase-service-account.json
