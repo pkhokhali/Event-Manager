@@ -1,0 +1,27 @@
+{
+  "name": "@event-manager/db",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "generate": "drizzle-kit generate",
+    "seed:sql": "tsx src/seed-sql.ts"
+  },
+  "dependencies": {
+    "@event-manager/shared": "*",
+    "drizzle-orm": "^0.38.3"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241230.0",
+    "@event-manager/tsconfig": "*",
+    "@types/node": "^22.10.2",
+    "drizzle-kit": "^0.30.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

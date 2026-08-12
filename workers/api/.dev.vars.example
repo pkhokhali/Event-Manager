@@ -1,0 +1,5 @@
+ADMIN_API_KEY=change-me-admin-secret-key
+CORS_ORIGINS=http://localhost:5173,http://localhost:8081
+R2_PUBLIC_URL=https://uploads.example.com
+R2_ACCOUNT_ID=
+R2_BUCKET_NAME=event-manager-uploads

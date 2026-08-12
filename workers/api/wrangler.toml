@@ -1,0 +1,33 @@
+name = "event-manager-api"
+main = "src/index.ts"
+compatibility_date = "2024-12-01"
+compatibility_flags = ["nodejs_compat"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "event-manager-db"
+database_id = "00000000-0000-0000-0000-000000000000"
+migrations_dir = "../../packages/db/migrations"
+
+[[r2_buckets]]
+binding = "UPLOADS"
+bucket_name = "event-manager-uploads"
+preview_bucket_name = "event-manager-uploads-preview"
+
+[[queues.producers]]
+binding = "PUSH_QUEUE"
+queue = "push-notifications"
+
+[triggers]
+crons = ["* * * * *", "15 2 * * *"]
+
+[vars]
+CORS_ORIGINS = "http://localhost:5173,http://localhost:8081"
+R2_PUBLIC_URL = "https://uploads.example.com"
+R2_ACCOUNT_ID = ""
+R2_BUCKET_NAME = "event-manager-uploads"
+
+# Set secrets via: wrangler secret put ADMIN_API_KEY
+# wrangler secret put R2_ACCESS_KEY_ID
+# wrangler secret put R2_SECRET_ACCESS_KEY
+# wrangler secret put FIREBASE_SERVICE_ACCOUNT_JSON

@@ -1,0 +1,10 @@
+{
+  "extends": "@event-manager/tsconfig/base.json",
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "noEmit": true,
+    "types": ["node", "@cloudflare/workers-types"]
+  },
+  "include": ["src/**/*"]
+}

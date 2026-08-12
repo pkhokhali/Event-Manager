@@ -1,0 +1,28 @@
+{
+  "name": "@event-manager/api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npx wrangler dev",
+    "deploy": "npx wrangler deploy",
+    "db:migrate:local": "npx wrangler d1 execute event-manager-db --local --file=../../packages/db/migrations/0001_init.sql",
+    "db:migrate:remote": "npx wrangler d1 execute event-manager-db --remote --file=../../packages/db/migrations/0001_init.sql",
+    "db:seed:local": "node ../../scripts/seed-d1.mjs",
+    "db:seed:remote": "node ../../scripts/seed-d1.mjs --remote",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@event-manager/db": "*",
+    "@event-manager/shared": "*",
+    "aws4fetch": "^1.0.20",
+    "drizzle-orm": "^0.38.3",
+    "hono": "^4.6.14",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241230.0",
+    "typescript": "^5.7.2",
+    "wrangler": "^3.99.0"
+  }
+}

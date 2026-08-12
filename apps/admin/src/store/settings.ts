@@ -11,7 +11,7 @@ type SettingsState = {
 export const useSettingsStore = create<SettingsState>()(
   persist(
     (set) => ({
-      apiUrl: import.meta.env.VITE_API_URL ?? 'http://localhost:4000/api/v1',
+      apiUrl: import.meta.env.VITE_API_URL ?? 'http://localhost:8787/api/v1',
       adminKey: '',
       setApiUrl: (apiUrl) => set({ apiUrl }),
       setAdminKey: (adminKey) => set({ adminKey }),

@@ -4,23 +4,26 @@
   "version": "1.0.0",
   "workspaces": [
     "packages/*",
-    "server",
-    "apps/*"
+    "apps/*",
+    "workers/*"
   ],
   "scripts": {
-    "dev": "turbo run dev --parallel",
-    "dev:server": "npm run dev -w @event-manager/server",
+    "dev": "npm run dev:api",
+    "dev:api": "npm run dev -w @event-manager/api",
     "dev:admin": "npm run dev -w @event-manager/admin",
     "dev:mobile": "npm run start -w @event-manager/mobile",
-    "build": "turbo run build",
-    "lint": "turbo run lint",
-    "db:generate": "npm run db:generate -w @event-manager/server",
-    "db:migrate": "npm run db:migrate -w @event-manager/server",
-    "db:seed": "npm run db:seed -w @event-manager/server",
-    "db:push": "npm run db:push -w @event-manager/server"
+    "dev:push": "npm run dev -w @event-manager/push-consumer",
+    "build": "npm run build -w @event-manager/shared && npm run build -w @event-manager/admin",
+    "build:shared": "npm run build -w @event-manager/shared",
+    "db:migrate:local": "npm run db:migrate:local -w @event-manager/api",
+    "db:migrate:remote": "npm run db:migrate:remote -w @event-manager/api",
+    "db:seed:local": "node scripts/seed-d1.mjs",
+    "db:seed:remote": "node scripts/seed-d1.mjs --remote",
+    "deploy:api": "npm run deploy -w @event-manager/api",
+    "deploy:push": "npm run deploy -w @event-manager/push-consumer",
+    "deploy:admin": "npm run deploy -w @event-manager/admin"
   },
   "devDependencies": {
-    "turbo": "^2.3.3",
     "typescript": "^5.7.2"
   },
   "engines": {
