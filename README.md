@@ -20,6 +20,18 @@ packages/i18n/            # English + Nepali
 - Cloudflare account + [Wrangler](https://developers.cloudflare.com/workers/wrangler/) (`npx wrangler login`)
 - Optional: Firebase project for push (FCM)
 
+## Live URLs (this account)
+
+| Service | URL |
+|---------|-----|
+| API | https://event-manager-api.prabinkhokhali89.workers.dev |
+| Admin | https://event-manager-admin.pages.dev |
+| Push consumer | https://event-manager-push-consumer.prabinkhokhali89.workers.dev |
+
+Admin login: username `admin` (var `ADMIN_USERNAME`) + password secret `ADMIN_PASSWORD`. Session tokens are signed with `ADMIN_API_KEY` (rotate both).
+
+R2 uploads: enable R2 in the [Cloudflare dashboard](https://dash.cloudflare.com/), create bucket `event-manager-uploads`, ensure `[[r2_buckets]]` in `workers/api/wrangler.toml`, then redeploy.
+
 ## Quick start (local)
 
 ```bash
@@ -33,17 +45,19 @@ npm run db:seed:local
 # API (http://localhost:8787)
 npm run dev:api
 
-# Admin (http://localhost:5173) — set Admin API key in Settings
+# Admin (http://localhost:5173) — sign in at /login
 npm run dev:admin
 
 # Mobile
 npm run dev:mobile
 ```
 
-Set `ADMIN_API_KEY` for local Workers via `.dev.vars` in `workers/api/`:
+Set secrets for local Workers via `.dev.vars` in `workers/api/`:
 
 ```
 ADMIN_API_KEY=change-me-admin-secret-key
+ADMIN_USERNAME=admin
+ADMIN_PASSWORD=change-me-admin-password
 CORS_ORIGINS=http://localhost:5173,http://localhost:8081
 R2_PUBLIC_URL=https://uploads.example.com
 ```
@@ -55,6 +69,7 @@ R2_PUBLIC_URL=https://uploads.example.com
 3. Create Queue: `npx wrangler queues create push-notifications`
 4. Create R2 API token (Object Read & Write) → set secrets:
    - `wrangler secret put ADMIN_API_KEY -c workers/api/wrangler.toml`
+   - `wrangler secret put ADMIN_PASSWORD -c workers/api/wrangler.toml`
    - `wrangler secret put R2_ACCESS_KEY_ID -c workers/api/wrangler.toml`
    - `wrangler secret put R2_SECRET_ACCESS_KEY -c workers/api/wrangler.toml`
    - `wrangler secret put FIREBASE_SERVICE_ACCOUNT_JSON -c workers/push-consumer/wrangler.toml`
@@ -74,7 +89,7 @@ R2_PUBLIC_URL=https://uploads.example.com
 
 ## Content model
 
-- **Admin** manages vendors, festivals, banners, featured, notifications, reviews (`X-Admin-Key`)
+- **Admin** signs in at `/login`; API uses `Authorization: Bearer <session>` (or legacy `X-Admin-Key`)
 - **Mobile users** store personal events/guests/budget/tasks in **MMKV** (no accounts)
 - Catalog (vendors, festivals, banners) comes from the Worker API
 
@@ -85,4 +100,4 @@ Unaffected by this stack — build the Expo Android app with EAS when ready. Reg
 ## Security
 
 - Never commit `.env`, `.dev.vars`, or Firebase service account JSON
-- Rotate `ADMIN_API_KEY` and R2 tokens periodically
+- Rotate `ADMIN_PASSWORD`, `ADMIN_API_KEY`, and R2 tokens periodically

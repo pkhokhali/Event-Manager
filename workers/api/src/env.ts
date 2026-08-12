@@ -2,9 +2,13 @@ import type { Database } from '@event-manager/db';
 
 export type Env = {
   DB: D1Database;
-  UPLOADS: R2Bucket;
+  UPLOADS?: R2Bucket;
   PUSH_QUEUE: Queue;
   ADMIN_API_KEY: string;
+  /** Login username (default: admin) */
+  ADMIN_USERNAME?: string;
+  /** Login password — set via wrangler secret */
+  ADMIN_PASSWORD?: string;
   CORS_ORIGINS: string;
   R2_PUBLIC_URL: string;
   R2_ACCOUNT_ID: string;

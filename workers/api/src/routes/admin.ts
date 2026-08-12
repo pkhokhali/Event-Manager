@@ -9,13 +9,61 @@ import {
   vendorReviews,
   vendors,
 } from '@event-manager/db';
+import { z } from 'zod';
 import type { Env, AppVariables } from '../env';
 import { adminAuth } from '../middleware';
+import { httpError } from '../lib/http';
+import { signSession } from '../lib/session';
 
-export const adminRoutes = new Hono<{ Bindings: Env; Variables: AppVariables }>();
-adminRoutes.use('*', adminAuth);
+type AppEnv = { Bindings: Env; Variables: AppVariables };
 
-adminRoutes.get('/stats', async (c) => {
+export const adminRoutes = new Hono<AppEnv>();
+
+const loginSchema = z.object({
+  username: z.string().min(1).max(80),
+  password: z.string().min(1).max(200),
+});
+
+/** Public — username/password → session token */
+adminRoutes.post('/login', async (c) => {
+  const body = loginSchema.parse(await c.req.json());
+  // Trim env values — `wrangler secret put` via PowerShell often stores a trailing \r\n
+  const username = (c.env.ADMIN_USERNAME || 'admin').trim();
+  const password = (c.env.ADMIN_PASSWORD || '').trim();
+  const signingSecret = (c.env.ADMIN_API_KEY || '').trim();
+  const givenUser = body.username.trim();
+  const givenPass = body.password.trim();
+
+  if (!password || !signingSecret) {
+    return httpError(
+      503,
+      'AUTH_NOT_CONFIGURED',
+      'ADMIN_PASSWORD and ADMIN_API_KEY must be set as Worker secrets'
+    );
+  }
+
+  if (givenUser !== username || givenPass !== password) {
+    return httpError(401, 'INVALID_CREDENTIALS', 'Invalid username or password');
+  }
+
+  const { token, expiresAt } = await signSession(signingSecret, username);
+  return c.json({
+    data: {
+      token,
+      expiresAt,
+      username,
+    },
+  });
+});
+
+const secured = new Hono<AppEnv>();
+secured.use('*', adminAuth);
+
+secured.get('/me', async (c) => {
+  return c.json({ data: { ok: true } });
+});
+
+secured.get('/stats', async (c) => {
   const db = c.get('db');
   const [
     vendorsCount,
@@ -56,3 +104,5 @@ adminRoutes.get('/stats', async (c) => {
     },
   });
 });
+
+adminRoutes.route('/', secured);

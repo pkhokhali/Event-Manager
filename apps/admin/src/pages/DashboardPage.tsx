@@ -14,7 +14,7 @@ export function DashboardPage() {
   if (error) {
     return (
       <div className="text-red-600">
-        Failed to load stats. Set Admin API key in Settings.
+        Failed to load stats. Try signing in again.
       </div>
     );
   }

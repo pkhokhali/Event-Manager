@@ -10,7 +10,7 @@ function esc(v: string | null | undefined) {
   return `'${String(v).replace(/'/g, "''")}'`;
 }
 
-const lines: string[] = ['PRAGMA foreign_keys = ON;', 'BEGIN TRANSACTION;'];
+const lines: string[] = ['PRAGMA foreign_keys = ON;'];
 
 for (const cat of CATEGORY_SEED) {
   const catId = randomUUID();
@@ -138,5 +138,4 @@ lines.push(
    WHERE NOT EXISTS (SELECT 1 FROM banners WHERE title = 'Plan Your Dream Wedding');`
 );
 
-lines.push('COMMIT;');
 console.log(lines.join('\n'));

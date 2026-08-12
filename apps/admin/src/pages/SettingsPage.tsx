@@ -1,7 +1,7 @@
 import { useSettingsStore } from '../store/settings';
 
 export function SettingsPage() {
-  const { apiUrl, adminKey, setApiUrl, setAdminKey } = useSettingsStore();
+  const { apiUrl, setApiUrl } = useSettingsStore();
 
   return (
     <div className="max-w-md">
@@ -15,17 +15,8 @@ export function SettingsPage() {
             onChange={(e) => setApiUrl(e.target.value)}
           />
         </div>
-        <div>
-          <label className="block text-sm font-medium mb-1">Admin API Key (X-Admin-Key)</label>
-          <input
-            className="border w-full px-2 py-1 rounded"
-            type="password"
-            value={adminKey}
-            onChange={(e) => setAdminKey(e.target.value)}
-          />
-        </div>
         <p className="text-xs text-stone-500">
-          No login system — store the shared secret here. Must match server ADMIN_API_KEY.
+          Sign in with your admin username and password. Sessions last 7 days.
         </p>
       </div>
     </div>

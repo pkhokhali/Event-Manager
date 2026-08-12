@@ -5,7 +5,7 @@ import { getDeviceId } from '../store/device';
 const baseURL =
   (Constants.expoConfig?.extra as { apiUrl?: string })?.apiUrl ??
   process.env.EXPO_PUBLIC_API_URL ??
-  'http://localhost:8787/api/v1';
+  'https://event-manager-api.prabinkhokhali89.workers.dev/api/v1';
 
 export const api = axios.create({ baseURL, timeout: 15000 });
 

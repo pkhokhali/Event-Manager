@@ -37,7 +37,7 @@
       "typedRoutes": true
     },
     "extra": {
-      "apiUrl": "http://localhost:8787/api/v1"
+      "apiUrl": "https://event-manager-api.prabinkhokhali89.workers.dev/api/v1"
     }
   }
 }
